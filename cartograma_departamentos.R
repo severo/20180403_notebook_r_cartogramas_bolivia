@@ -30,18 +30,18 @@ rawplot <- ggplot(result_df_raw) +
 rawplot
 
 
-par(mfrow = c(2, 3), mar = c(0, 0, 2, 0))
-for (i in 1:6) {
-  new_cells <- calculate_grid(shape = original_shapes, grid_type = "hexagonal", seed = i)
-  plot(new_cells, main = paste("Seed", i, sep = " "))
-}
+#par(mfrow = c(2, 3), mar = c(0, 0, 2, 0))
+#for (i in 1:6) {
+  #new_cells <- calculate_grid(shape = original_shapes, grid_type = "hexagonal", seed = i)
+  #plot(new_cells, main = paste("Seed", i, sep = " "))
+#}
 
 
-par(mfrow = c(2, 3), mar = c(0, 0, 2, 0))
-for (i in 1:6) {
-  new_cells <- calculate_grid(shape = original_shapes, grid_type = "regular", seed = i)
-  sp::plot(new_cells, main = paste("Seed", i, sep = " "))
-}
+#par(mfrow = c(2, 3), mar = c(0, 0, 2, 0))
+#for (i in 1:6) {
+#  new_cells <- calculate_grid(shape = original_shapes, grid_type = "regular", seed = i)
+#  sp::plot(new_cells, main = paste("Seed", i, sep = " "))
+#}
 
 
 
@@ -53,10 +53,13 @@ resultreg <- assign_polygons(original_shapes, new_cells_reg)
 
 
 result_df_hex <- clean(resulthex)
+result_df_hex$couleur <- as.numeric(levels(result_df_hex$COD_DEP)[result_df_hex$COD_DEP])
+
 result_df_reg <- clean(resultreg)
+result_df_reg$couleur <- as.numeric(levels(result_df_reg$COD_DEP)[result_df_reg$COD_DEP])
 
 hexplot <- ggplot(result_df_hex) +
-  geom_polygon(aes(x = long, y = lat)) +
+  geom_polygon(aes(x = long, y = lat, fill = couleur, group=group)) +
   geom_text(aes(V1, V2, label = substr(NOM_DEP, 1, 4)), size = 2, color = "white") +
   scale_fill_viridis() +
   coord_equal() +
@@ -64,7 +67,7 @@ hexplot <- ggplot(result_df_hex) +
   theme_void()
 
 regplot <- ggplot(result_df_reg) +
-  geom_polygon(aes(x = long, y = lat, fill=NOM_DEP, group=group)) +
+  geom_polygon(aes(x = long, y = lat, fill = couleur, group=group)) +
   geom_text(aes(V1, V2, label = substr(NOM_DEP, 1, 4)), size = 2, color = "white") +
   coord_equal() +
   scale_fill_viridis() +
