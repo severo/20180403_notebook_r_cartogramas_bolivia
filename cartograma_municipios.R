@@ -21,7 +21,7 @@ result_df_raw <- clean(raw)
 result_df_raw$couleur <- as.numeric(levels(result_df_raw$codigo_dep)[result_df_raw$codigo_dep])
 rawplot <- ggplot(result_df_raw) +
   geom_polygon(aes(x = long, y = lat, fill = couleur, group=group)) +
-  geom_text(aes(xcentroid, ycentroid, label = substr(nombre_dep, 1, 4)), size = 2,color = "white") +
+  #geom_text(aes(xcentroid, ycentroid, label = substr(nombre_dep, 1, 4)), size = 2,color = "white") +
   coord_equal() +
   scale_fill_viridis() +
   guides(fill = FALSE) +
@@ -60,7 +60,7 @@ result_df_reg$couleur <- as.numeric(levels(result_df_reg$codigo_dep)[result_df_r
 
 hexplot <- ggplot(result_df_hex) +
   geom_polygon(aes(x = long, y = lat, fill = couleur, group=group)) +
-  geom_text(aes(V1, V2, label = substr(nombre_dep, 1, 4)), size = 2, color = "white") +
+  #geom_text(aes(V1, V2, label = substr(nombre_dep, 1, 4)), size = 2, color = "white") +
   scale_fill_viridis() +
   coord_equal() +
   guides(fill = FALSE) +
@@ -68,7 +68,7 @@ hexplot <- ggplot(result_df_hex) +
 
 regplot <- ggplot(result_df_reg) +
   geom_polygon(aes(x = long, y = lat, fill = couleur, group=group)) +
-  geom_text(aes(V1, V2, label = substr(nombre_dep, 1, 4)), size = 2, color = "white") +
+  #geom_text(aes(V1, V2, label = substr(nombre_dep, 1, 4)), size = 2, color = "white") +
   coord_equal() +
   scale_fill_viridis() +
   guides(fill = FALSE) +
